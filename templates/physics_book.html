@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Important Chapters for JEE</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            padding: 15px;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: opacity 0.3s;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        nav a {
+            color: #00ccff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #007bff;
+        }
+
+        .container {
+            perspective: 1000px;
+            max-width: 800px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 20px;
+            transition: opacity 0.3s;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            text-shadow: 3px 3px 10px rgba(255, 255, 255, 0.5), 
+                        -3px -3px 10px rgba(0, 0, 255, 0.5);
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, rgba(0, 123, 255, 0.8), rgba(255, 0, 123, 0.8));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-top: 20px;
+            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.5),
+                        -2px -2px 5px rgba(255, 165, 0, 0.7);
+            background: linear-gradient(90deg, rgba(255, 0, 0, 0.8), rgba(255, 165, 0, 0.8));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .login_signup {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .login_signup button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .login_signup button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.5);
+        }
+
+        .login_signup button:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .message {
+            margin-top: 10px;
+            color: #28a745;
+        }
+
+        .error {
+            color: #ff0000;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('exam') }}">Exam Practice</a>
+            <a href="{{ url_for('important_chap') }}">Important Chapters</a>
+            <a href="{{ url_for('important_book') }}">Important Books</a>
+            <a href="{{ url_for('relevancy_meter') }}">Relevancy Meter</a>
+            <a href="{{ url_for('leaderboard') }}">LeaderBoard</a>
+            <a href="{{ url_for('timer') }}">Timer</a>
+            <div class="login_signup">
+                <button id="loginBtn">Log In</button>
+                <button id="signupBtn">Sign Up</button>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Important Books for JEE</h1>
+        <h2>Physics</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>S. No.</th>
+                    <th>Books</th>
+                    <th>Authors</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.</td>
+                    <td>Concepts of Physics for JEE</td>
+                    <td>H.C. Verma (Vol. I and Vol. II)</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Fundamental Physics</td>
+                    <td>Halliday, Resnick, and Walker</td>
+                </tr>
+                <tr>
+                    <td>3.</td>
+                    <td>IIT JEE Physics 35 Years Chapter-wise Solved Papers</td>
+                    <td>D.C. Pandey</td>
+                </tr>
+                <tr>
+                    <td>4.</td>
+                    <td>Problems in Physics</td>
+                    <td>A.A. Pinsky</td>
+                </tr>
+                <tr>
+                    <td>5.</td>
+                    <td>A Collection of Questions and Problems in Physics</td>
+                    <td>L.A. Sena</td>
+                </tr>
+                <tr>
+                    <td>6.</td>
+                    <td>Advanced Level Physics: Examples and Exercises</td>
+                    <td>Nelkon, Michael, Parker, Philip</td>
+                </tr>
+                <tr>
+                    <td>7.</td>
+                    <td>Physics (Vol. I and II)</td>
+                    <td>Paul A. Tipler</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        // Change header opacity on scroll
+        window.addEventListener('scroll', function() {
+            const scrollY = window.scrollY;
+            const header = document.querySelector('header');
+
+            // Change opacity based on scroll position
+            const opacityValue = 1 - scrollY / 200;
+            header.style.opacity = Math.max(opacityValue, 0.6);
+        });
+
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            window.location.href = "{{ url_for('login') }}"; // Redirect to login page
+        });
+
+        document.getElementById('signupBtn').addEventListener('click', function() {
+            window.location.href = "{{ url_for('signup') }}"; // Redirect to signup page
+        });
+    </script>
+</body>
+</html>

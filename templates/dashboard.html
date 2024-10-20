@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #000428, #004e92); /* Dark gradient background */
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+            transition: background-color 1s, color 1s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        body.light-mode {
+            background-color: #f0f0f0; /* Light mode background */
+            color: #000; /* Light mode text color */
+        }
+
+        h1 {
+            color: #1e90ff; /* Dodger blue */
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3); /* Added text shadow */
+        }
+
+        .message {
+            margin: 20px 0;
+            font-size: 1.5em;
+            color: #ff4500; /* Orange red */
+        }
+
+        .button {
+            background-color: #007bff; /* Matching the button style from home.html */
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 30px; /* Rounded buttons to match home.html */
+            margin: 5px;
+            display: inline-block;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3); /* Added box shadow */
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.5); /* Hover effect for button */
+        }
+
+        .logout {
+            background-color: #ff4500; /* Orange red */
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.3); /* Added shadow to logout button */
+        }
+
+        .logout:hover {
+            background-color: #c62828; /* Darker red on hover */
+            box-shadow: 0 10px 20px rgba(255, 69, 0, 0.5); /* Hover effect for logout button */
+        }
+
+        /* Light/Dark Mode Toggle Button */
+        .toggle-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .toggle-btn svg {
+            width: 30px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-btn" id="toggleBtn">
+        <svg id="lightIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
+    </button>
+
+    <h1>Welcome to your Dashboard, {{ current_user.username }}!</h1>
+    
+    <div class="message">🎉 Account created successfully!</div>
+    
+    <a class="button" href="{{ url_for('home') }}">Go to Home</a>
+    <a class="button logout" href="{{ url_for('logout') }}">Logout</a>
+
+    <script>
+        // Light/Dark mode toggle
+        document.getElementById('toggleBtn').addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            const lightIcon = document.getElementById('lightIcon');
+            if (document.body.classList.contains('light-mode')) {
+                lightIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/></svg>`;
+            } else {
+                lightIcon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 60q-64 0-109-45t-45-109q0-64 45-109t109-45q64 0 109 45t45 109q0 64-45 109t-109 45ZM480-840q-104 0-178 74t-74 178q0 104 74 178t178 74q104 0 178-74t74-178q0-104-74-178t-178-74Zm0 360Zm0-480q0-48 5-99t21-99q-47 12-88 37t-69 61q0 52 11 111.5T480-480Zm240-240q39-24 69-61.5t50-90.5q0-45-32-77.5T675-540Z"/></svg>`;
+            }
+        });
+    </script>
+</body>
+</html>

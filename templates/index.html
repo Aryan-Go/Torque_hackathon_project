@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarvis Voice Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .response {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #e7f3fe;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Jarvis Voice Assistant</h1>
+    <input type="text" id="commandInput" placeholder="Type your command here...">
+    <button id="sendCommand">Send Command</button>
+
+    <div id="responseArea" class="response" style="display: none;"></div>
+    <button id="listenButton">Listen for Command</button>
+    <div id="responseOutput" class="response" style="display: none;"></div>
+</div>
+
+<script>
+    document.getElementById('sendCommand').addEventListener('click', async () => {
+        const command = document.getElementById('commandInput').value;
+
+        if (!command) {
+            alert("Please enter a command.");
+            return;
+        }
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/command', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ command })
+            });
+
+            const data = await response.json();
+            const responseArea = document.getElementById('responseArea');
+
+            if (response.ok) {
+                responseArea.innerHTML = `<strong>Response:</strong> ${data.response}`;
+            } else {
+                responseArea.innerHTML = `<strong>Error:</strong> ${data.error || 'Something went wrong!'}`;
+            }
+
+            responseArea.style.display = 'block';
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while communicating with the server.');
+        }
+    });
+
+    document.getElementById("listenButton").addEventListener("click", function() {
+        fetch('http://127.0.0.1:8000/listen')
+            .then(response => response.json())
+            .then(data => {
+                const responseOutput = document.getElementById("responseOutput");
+                if (data.response) {
+                    responseOutput.innerHTML = `<strong>Response:</strong> ${data.response}`;
+                } else {
+                    responseOutput.innerHTML = `<strong>Error:</strong> ${data.error || 'Something went wrong!'}`;
+                }
+                responseOutput.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while trying to listen for commands.');
+            });
+    });
+</script>
+
+</body>
+</html>

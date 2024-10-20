@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Subjects</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            transition: background-color 1s, color 1s;
+        }
+
+        .button {   
+            border: none;
+            border-radius: 20px;
+            width: 100%; /* Set width to 100% */
+            max-width: 600px; /* Limit max width */
+            height: 200px;
+            font-size: 80px;
+            font-weight: bold;
+            color: #ffd900;
+            text-align: center;
+            cursor: pointer;
+            margin: 20px 0; /* Adjust margin for vertical spacing */
+            position: relative;
+            overflow: hidden;
+            transition: transform 1s, box-shadow 1s;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 255, 0, 0.5);
+        }
+
+        .physics {
+            background-image: url('https://t3.ftcdn.net/jpg/01/97/49/40/360_F_197494079_U9dM6IxEBzdUmrhe3DFxyi8L0aFGtQME.jpg');
+            color: #ff8c00;
+            text-shadow: 5px 5px 0 black;
+        }
+
+        .chemistry {
+            background-image: url('https://www.thoughtco.com/thmb/6MsMmUK27akFhb8i89kj95J5iko=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-545286316-433dd345105e4c6ebe4cdd8d2317fdaa.jpg');
+            color: white;
+            text-shadow: 5px 5px 0 black;
+        }
+
+        .maths {
+            background-image: url('https://imgs.search.brave.com/CZAIxexXP0OvnQUGLM-mJOePr5EVa-LqcfOYXAiufPQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAyLzU4LzcyLzUz/LzM2MF9GXzI1ODcy/NTMxOV9tSlNzVXpW/SXZaQzJJMEdhNVk3/ajhaNnN5NkxFM0NZ/Zy5qcGc');
+            color: #00ff44;
+            text-shadow: 5px 5px 0 black;
+        }
+
+        header {
+            background-color: #1a1a1a;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 1s;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: #00ccff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 1s;
+        }
+
+        nav a:hover {
+            background-color: #007bff;
+        }
+
+        .login_signup button {
+            padding: 10px 20px;
+            margin: 0 10px; /* Space between buttons */
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 1s, box-shadow 1s;
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .login_signup button:hover {
+            transform: translateY(-3px); /* Slight lift effect */
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.5);
+        }
+
+        .login_signup button:active {
+            transform: translateY(0); /* Reset effect when clicked */
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Light Mode Styles */
+        body.light-mode {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        body.light-mode header{
+            background-color: white;
+        }
+        .button.light-mode {
+            color: #333;
+        }
+        .button.physics{
+            color: orange;
+        }
+        .button.chemistry{
+            color: white;
+        }
+        .button.maths{
+            color: green;
+        }
+        nav.light-mode {
+            background-color: white; /* White navbar in light mode */
+        }
+        nav.light-mode a {
+            color: #007bff; /* Change link color in light mode */
+        }
+
+        /* Toggle button styles */
+        .toggle-btn {
+            /* background: none; Remove default background */
+            border: none; /* Remove border */
+            cursor: pointer;
+            color: #00ccff; /* Change color */
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('exam') }}">Exam Practice</a>
+            <a href="{{ url_for('important_chap') }}">Important Chapters</a>
+            <a href="{{ url_for('important_book') }}">Important Books</a>
+            <a href="{{ url_for('relevancy_meter') }}">Relevancy Meter</a>
+            <a href="{{ url_for('leaderboard') }}">Leaderboard</a>
+            <a href="{{ url_for('timer') }}">Timer</a>
+            <div class="login_signup">
+                <button id="loginBtn">Log In</button>
+                <button id="signupBtn">Sign Up</button>
+                <button class="toggle-btn" id="toggleMode">
+                    <svg id="modeIcon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+                        <path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+    <button class="button physics">PHYSICS</button>
+    <script>
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            window.location.href = "{{ url_for('login') }}"; // Redirect to login page
+        });
+
+        document.getElementById('signupBtn').addEventListener('click', function() {
+            window.location.href = "{{ url_for('signup') }}"; // Redirect to signup page
+        });
+
+        document.querySelector('.physics').addEventListener('click', function() {
+            window.location.href = "{{ url_for('phy_q1') }}"; // Link to your physics page
+        });
+
+        
+
+        const toggleButton = document.getElementById('toggleMode');
+        toggleButton.addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            document.querySelectorAll('.button').forEach(button => button.classList.toggle('light-mode'));
+            const modeIcon = document.getElementById('modeIcon');
+            modeIcon.innerHTML = document.body.classList.contains('light-mode') ?
+                '<path d="M480-360q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0 80q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/>' :
+                '<path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/>';
+        });
+    </script>
+</body>
+</html>
